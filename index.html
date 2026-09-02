@@ -1,704 +1,3161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sreeraj Ramachandran — Network & Security Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #080c10;
-    --surface: #0d1219;
-    --card: #111820;
-    --border: #1e2d3d;
-    --accent: #00e5ff;
-    --accent2: #00ff9d;
-    --accent3: #ff6b35;
-    --text: #c8d8e8;
-    --muted: #4a6275;
-    --mono: 'Share Tech Mono', monospace;
-    --sans: 'Syne', sans-serif;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  <title>Sreeraj Ramachandran — Network & Security Engineer</title>
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    overflow-x: hidden;
-    cursor: none;
-  }
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&display=swap"
+    rel="stylesheet">
 
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease;
-    mix-blend-mode: screen;
-  }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9998;
-    opacity: 0.5;
-    transition: transform 0.18s ease;
-    mix-blend-mode: screen;
-  }
+  <style>
 
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none; z-index: 0;
-  }
+    /* =========================================================
+       ROOT
+    ========================================================= */
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(8,12,16,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo { font-family: var(--mono); color: var(--accent); font-size: 0.9rem; letter-spacing: 2px; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-family: var(--mono); font-size: 0.78rem; color: var(--muted);
-    text-decoration: none; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
+    :root {
+      --bg: #080c10;
+      --surface: #0d1219;
+      --card: #111820;
+      --border: #1e2d3d;
 
-  /* HERO */
-  .hero {
-    min-height: 100vh; display: flex; align-items: center;
-    padding: 0 4rem; position: relative; z-index: 1;
-  }
-  .hero-inner { max-width: 900px; }
-  .hero-tag {
-    font-family: var(--mono); font-size: 0.75rem; color: var(--accent);
-    letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards;
-  }
-  .hero-name {
-    font-size: clamp(3rem, 7vw, 6rem); font-weight: 800; line-height: 1.0; color: #fff;
-    opacity: 0; animation: fadeUp 0.7s ease 0.4s forwards;
-  }
-  .hero-name span { color: transparent; -webkit-text-stroke: 1px var(--accent); }
-  .hero-role {
-    font-family: var(--mono); font-size: 1.1rem; color: var(--accent2);
-    margin-top: 1.2rem; opacity: 0; animation: fadeUp 0.7s ease 0.6s forwards;
-  }
-  .hero-desc {
-    font-size: 1rem; color: var(--muted); line-height: 1.8; margin-top: 1.5rem;
-    max-width: 560px; opacity: 0; animation: fadeUp 0.7s ease 0.8s forwards;
-  }
-  .hero-cta {
-    display: flex; gap: 1rem; margin-top: 2.5rem;
-    opacity: 0; animation: fadeUp 0.7s ease 1s forwards;
-  }
-  .btn {
-    font-family: var(--mono); font-size: 0.8rem; letter-spacing: 2px;
-    text-transform: uppercase; padding: 0.8rem 2rem; text-decoration: none;
-    border-radius: 2px; transition: all 0.2s; cursor: none;
-  }
-  .btn-primary { background: var(--accent); color: #000; font-weight: bold; }
-  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
-  .btn-outline { border: 1px solid var(--border); color: var(--text); }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+      --accent: #00e5ff;
+      --accent2: #00ff9d;
+      --accent3: #ff6b35;
 
-  .hero-graphic {
-    position: absolute; right: 4rem; top: 50%; transform: translateY(-50%);
-    width: 340px; height: 340px; opacity: 0; animation: fadeIn 1.2s ease 1.2s forwards;
-  }
-  .hero-graphic svg { width: 100%; height: 100%; }
+      --text: #c8d8e8;
+      --muted: #4a6275;
 
-  /* SECTIONS */
-  section { padding: 7rem 4rem; position: relative; z-index: 1; }
-  .section-label {
-    font-family: var(--mono); font-size: 0.72rem; color: var(--accent);
-    letter-spacing: 4px; text-transform: uppercase; margin-bottom: 0.6rem;
-  }
-  .section-title { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; color: #fff; margin-bottom: 3rem; }
-  .section-title span { color: var(--accent); }
+      --mono: 'Share Tech Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
 
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 220px 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
 
-  /* Photo */
-  .about-photo { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-  .photo-frame { position: relative; width: 190px; height: 190px; }
-  .photo-frame::before {
-    content: ''; position: absolute; inset: -6px;
-    border: 1px solid var(--accent); border-radius: 4px; opacity: 0.5;
-  }
-  .photo-frame::after {
-    content: ''; position: absolute; inset: -12px;
-    border: 1px solid var(--accent); border-radius: 4px; opacity: 0.2;
-  }
-  .photo-frame img {
-    width: 190px; height: 190px; object-fit: cover;
-    border-radius: 4px; display: block; border: 2px solid var(--border);
-  }
-  .photo-placeholder {
-    width: 190px; height: 190px;
-    background: var(--card); border: 2px dashed var(--border); border-radius: 4px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.5rem; color: var(--muted); font-family: var(--mono);
-    font-size: 0.7rem; letter-spacing: 1px; text-align: center; padding: 1rem;
-  }
-  .photo-name-tag {
-    font-family: var(--mono); font-size: 0.7rem;
-    color: var(--accent); letter-spacing: 2px; text-align: center;
-  }
+    /* =========================================================
+       GLOBAL
+    ========================================================= */
 
-  .about-text p { color: var(--text); line-height: 1.9; margin-bottom: 1rem; font-size: 0.97rem; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-  .stat-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 4px;
-    padding: 1.2rem; position: relative; overflow: hidden; transition: border-color 0.2s;
-  }
-  .stat-card::before {
-    content: ''; position: absolute; top: 0; left: 0;
-    width: 3px; height: 100%; background: var(--accent);
-  }
-  .stat-card:hover { border-color: var(--accent); }
-  .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); font-family: var(--mono); }
-  .stat-label { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 1px; margin-top: 0.3rem; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* SKILLS */
-  #skills { background: var(--surface); }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-  .skill-cat {
-    background: var(--card); border: 1px solid var(--border); border-radius: 4px;
-    padding: 2rem; transition: border-color 0.2s, transform 0.2s;
-  }
-  .skill-cat:hover { border-color: var(--accent); transform: translateY(-4px); }
-  .skill-cat-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
-  .skill-cat-name {
-    font-family: var(--mono); font-size: 0.8rem; color: var(--accent);
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem;
-  }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .skill-tag {
-    font-family: var(--mono); font-size: 0.72rem;
-    background: rgba(0,229,255,0.07); border: 1px solid rgba(0,229,255,0.15);
-    color: var(--text); padding: 0.3rem 0.8rem; border-radius: 2px; letter-spacing: 0.5px;
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+      cursor: none;
+    }
 
-  /* PROJECTS */
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-  .project-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 4px;
-    padding: 2rem; position: relative; overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s; cursor: none;
-  }
-  .project-card::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(0,229,255,0.04), transparent);
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-  .project-card:hover::after { opacity: 1; }
-  .project-num { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 1rem; }
-  .project-title { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.8rem; }
-  .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .project-tag {
-    font-family: var(--mono); font-size: 0.68rem; color: var(--accent2);
-    border: 1px solid rgba(0,255,157,0.2); padding: 0.2rem 0.6rem; border-radius: 2px;
-  }
 
-  /* CERTIFICATIONS */
-  #certifications { background: var(--surface); }
-  .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
-  .cert-item {
-    background: var(--card); border: 1px solid var(--border); border-radius: 4px;
-    padding: 1.4rem 1.8rem; display: flex; align-items: center; gap: 1.2rem; transition: border-color 0.2s;
-  }
-  .cert-item:hover { border-color: var(--accent3); }
-  .cert-icon { font-size: 1.8rem; flex-shrink: 0; }
-  .cert-name { font-size: 0.92rem; font-weight: 700; color: #fff; }
-  .cert-body { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; letter-spacing: 1px; }
+    /* =========================================================
+       CUSTOM CURSOR
+    ========================================================= */
 
-  /* CONTACT */
-  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .contact-text p { color: var(--muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 2rem; }
-  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-  .contact-link {
-    display: flex; align-items: center; gap: 1rem;
-    font-family: var(--mono); font-size: 0.82rem; color: var(--text);
-    text-decoration: none; padding: 1rem 1.2rem;
-    border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; cursor: none;
-  }
-  .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateX(6px); }
-  .contact-link-icon { font-size: 1.1rem; }
+    .cursor {
+      width: 10px;
+      height: 10px;
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border); padding: 2rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-    position: relative; z-index: 1;
-  }
-  .footer-copy { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; }
-  .footer-dot { width: 8px; height: 8px; background: var(--accent2); border-radius: 50%; animation: pulse 2s infinite; }
+      background: var(--accent);
 
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 0.9; } }
-  @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  @keyframes rotateReverse { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+      border-radius: 50%;
 
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: none; }
+      position: fixed;
+      top: 0;
+      left: 0;
 
-  @media (max-width: 900px) {
-    .about-grid { grid-template-columns: 1fr; }
-    .about-photo { margin-bottom: 1rem; }
-  }
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.2rem; }
-    section { padding: 5rem 1.5rem; }
-    .hero { padding: 0 1.5rem; }
-    .hero-graphic { display: none; }
-    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
-  }
-</style>
+      pointer-events: none;
+
+      z-index: 9999;
+
+      transition: transform 0.1s ease;
+
+      mix-blend-mode: screen;
+    }
+
+    .cursor-ring {
+      width: 36px;
+      height: 36px;
+
+      border: 1px solid var(--accent);
+
+      border-radius: 50%;
+
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      pointer-events: none;
+
+      z-index: 9998;
+
+      opacity: 0.5;
+
+      transition: transform 0.18s ease;
+
+      mix-blend-mode: screen;
+    }
+
+
+    /* =========================================================
+       BACKGROUND GRID
+    ========================================================= */
+
+    body::before {
+      content: '';
+
+      position: fixed;
+      inset: 0;
+
+      background-image:
+        linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+
+      background-size: 40px 40px;
+
+      pointer-events: none;
+
+      z-index: 0;
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    nav {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 100;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 1.2rem 4rem;
+
+      background: rgba(8, 12, 16, 0.85);
+
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+
+      color: var(--accent);
+
+      font-size: 0.9rem;
+
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+
+      gap: 2.5rem;
+
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+
+      font-size: 0.78rem;
+
+      color: var(--muted);
+
+      text-decoration: none;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+
+      align-items: center;
+
+      padding: 0 4rem;
+
+      position: relative;
+
+      z-index: 1;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+
+      font-size: 0.75rem;
+
+      color: var(--accent);
+
+      letter-spacing: 4px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 1.5rem;
+
+      opacity: 0;
+
+      animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 7vw, 6rem);
+
+      font-weight: 800;
+
+      line-height: 1;
+
+      color: #fff;
+
+      opacity: 0;
+
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+
+    .hero-name span {
+      color: transparent;
+
+      -webkit-text-stroke: 1px var(--accent);
+    }
+
+    .hero-role {
+      font-family: var(--mono);
+
+      font-size: 1.1rem;
+
+      color: var(--accent2);
+
+      margin-top: 1.2rem;
+
+      opacity: 0;
+
+      animation: fadeUp 0.7s ease 0.6s forwards;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+
+      color: var(--muted);
+
+      line-height: 1.8;
+
+      margin-top: 1.5rem;
+
+      max-width: 600px;
+
+      opacity: 0;
+
+      animation: fadeUp 0.7s ease 0.8s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+
+      gap: 1rem;
+
+      margin-top: 2.5rem;
+
+      opacity: 0;
+
+      animation: fadeUp 0.7s ease 1s forwards;
+    }
+
+    .btn {
+      font-family: var(--mono);
+
+      font-size: 0.8rem;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      padding: 0.8rem 2rem;
+
+      text-decoration: none;
+
+      border-radius: 2px;
+
+      transition: all 0.2s;
+
+      cursor: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+
+      color: #000;
+
+      font-weight: bold;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent2);
+
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+
+      color: var(--accent);
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+       HERO NETWORK GRAPHIC
+    ========================================================= */
+
+    .hero-graphic {
+      position: absolute;
+
+      right: 4rem;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      width: 340px;
+
+      height: 340px;
+
+      opacity: 0;
+
+      animation: fadeIn 1.2s ease 1.2s forwards;
+    }
+
+    .hero-graphic svg {
+      width: 100%;
+      height: 100%;
+    }
+
+
+    /* =========================================================
+       SECTIONS
+    ========================================================= */
+
+    section {
+      padding: 7rem 4rem;
+
+      position: relative;
+
+      z-index: 1;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+
+      font-size: 0.72rem;
+
+      color: var(--accent);
+
+      letter-spacing: 4px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+
+      font-weight: 800;
+
+      color: #fff;
+
+      margin-bottom: 3rem;
+    }
+
+    .section-title span {
+      color: var(--accent);
+    }
+
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+
+    .about-grid {
+      display: grid;
+
+      grid-template-columns: 220px 1fr 1fr;
+
+      gap: 3rem;
+
+      align-items: start;
+    }
+
+    .about-photo {
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 1rem;
+    }
+
+    .photo-frame {
+      position: relative;
+
+      width: 190px;
+
+      height: 190px;
+    }
+
+    .photo-frame::before {
+      content: '';
+
+      position: absolute;
+
+      inset: -6px;
+
+      border: 1px solid var(--accent);
+
+      border-radius: 4px;
+
+      opacity: 0.5;
+    }
+
+    .photo-frame::after {
+      content: '';
+
+      position: absolute;
+
+      inset: -12px;
+
+      border: 1px solid var(--accent);
+
+      border-radius: 4px;
+
+      opacity: 0.2;
+    }
+
+    .photo-frame img {
+      width: 190px;
+
+      height: 190px;
+
+      object-fit: cover;
+
+      border-radius: 4px;
+
+      display: block;
+
+      border: 2px solid var(--border);
+    }
+
+    .photo-name-tag {
+      font-family: var(--mono);
+
+      font-size: 0.7rem;
+
+      color: var(--accent);
+
+      letter-spacing: 2px;
+
+      text-align: center;
+    }
+
+    .about-text p {
+      color: var(--text);
+
+      line-height: 1.9;
+
+      margin-bottom: 1rem;
+
+      font-size: 0.97rem;
+    }
+
+    .about-stats {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 1.2rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 4px;
+
+      padding: 1.2rem;
+
+      position: relative;
+
+      overflow: hidden;
+
+      transition: border-color 0.2s;
+    }
+
+    .stat-card::before {
+      content: '';
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 3px;
+
+      height: 100%;
+
+      background: var(--accent);
+    }
+
+    .stat-card:hover {
+      border-color: var(--accent);
+    }
+
+    .stat-num {
+      font-size: 1.8rem;
+
+      font-weight: 800;
+
+      color: var(--accent);
+
+      font-family: var(--mono);
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+
+      font-size: 0.68rem;
+
+      color: var(--muted);
+
+      letter-spacing: 1px;
+
+      margin-top: 0.3rem;
+    }
+
+
+    /* =========================================================
+       SKILLS
+    ========================================================= */
+
+    #skills {
+      background: var(--surface);
+    }
+
+    .skills-grid {
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+      gap: 1.5rem;
+    }
+
+    .skill-cat {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 4px;
+
+      padding: 2rem;
+
+      transition:
+        border-color 0.2s,
+        transform 0.2s;
+    }
+
+    .skill-cat:hover {
+      border-color: var(--accent);
+
+      transform: translateY(-4px);
+    }
+
+    .skill-cat-icon {
+      font-size: 1.6rem;
+
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-cat-name {
+      font-family: var(--mono);
+
+      font-size: 0.8rem;
+
+      color: var(--accent);
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-tags {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      font-family: var(--mono);
+
+      font-size: 0.72rem;
+
+      background: rgba(0, 229, 255, 0.07);
+
+      border: 1px solid rgba(0, 229, 255, 0.15);
+
+      color: var(--text);
+
+      padding: 0.3rem 0.8rem;
+
+      border-radius: 2px;
+
+      letter-spacing: 0.5px;
+    }
+
+
+    /* =========================================================
+       PROJECTS
+    ========================================================= */
+
+    #projects {
+      background: var(--bg);
+    }
+
+    .projects-intro {
+      max-width: 750px;
+
+      color: var(--muted);
+
+      line-height: 1.8;
+
+      font-size: 0.95rem;
+
+      margin-top: -1.5rem;
+
+      margin-bottom: 2.5rem;
+    }
+
+    .projects-grid {
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 4px;
+
+      padding: 2rem;
+
+      position: relative;
+
+      overflow: hidden;
+
+      transition:
+        border-color 0.2s,
+        transform 0.2s;
+
+      cursor: none;
+    }
+
+    .project-card::after {
+      content: '';
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(0, 229, 255, 0.04),
+          transparent
+        );
+
+      opacity: 0;
+
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+
+      transform: translateY(-5px);
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
+    .project-num {
+      font-family: var(--mono);
+
+      font-size: 0.68rem;
+
+      color: var(--accent);
+
+      letter-spacing: 2px;
+
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-size: 1.15rem;
+
+      font-weight: 700;
+
+      color: #fff;
+
+      margin-bottom: 0.8rem;
+
+      line-height: 1.4;
+    }
+
+    .project-role {
+      font-family: var(--mono);
+
+      font-size: 0.7rem;
+
+      color: var(--accent2);
+
+      letter-spacing: 1px;
+
+      margin-bottom: 1rem;
+
+      text-transform: uppercase;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+
+      color: var(--muted);
+
+      line-height: 1.7;
+
+      margin-bottom: 1.2rem;
+    }
+
+    .project-work {
+      margin-bottom: 1.5rem;
+
+      padding-left: 1rem;
+
+      border-left: 1px solid var(--border);
+    }
+
+    .project-work li {
+      list-style: none;
+
+      font-family: var(--mono);
+
+      font-size: 0.7rem;
+
+      color: var(--text);
+
+      margin-bottom: 0.5rem;
+
+      line-height: 1.5;
+    }
+
+    .project-work li::before {
+      content: "> ";
+
+      color: var(--accent);
+
+      font-weight: bold;
+    }
+
+    .project-tags {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 0.5rem;
+    }
+
+    .project-tag {
+      font-family: var(--mono);
+
+      font-size: 0.68rem;
+
+      color: var(--accent2);
+
+      border: 1px solid rgba(0, 255, 157, 0.2);
+
+      padding: 0.2rem 0.6rem;
+
+      border-radius: 2px;
+    }
+
+
+    /* =========================================================
+       PROJECT STATS
+    ========================================================= */
+
+    .project-summary {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 1rem;
+
+      margin-top: 3rem;
+    }
+
+    .project-summary-card {
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+
+      padding: 1.3rem;
+
+      text-align: center;
+
+      border-radius: 4px;
+
+      transition: border-color 0.2s;
+    }
+
+    .project-summary-card:hover {
+      border-color: var(--accent);
+    }
+
+    .project-summary-number {
+      font-family: var(--mono);
+
+      font-size: 1.5rem;
+
+      color: var(--accent);
+
+      margin-bottom: 0.4rem;
+    }
+
+    .project-summary-label {
+      font-family: var(--mono);
+
+      font-size: 0.65rem;
+
+      color: var(--muted);
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       CERTIFICATIONS
+    ========================================================= */
+
+    #certifications {
+      background: var(--surface);
+    }
+
+    .cert-list {
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+      gap: 1rem;
+    }
+
+    .cert-item {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 4px;
+
+      padding: 1.4rem 1.8rem;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 1.2rem;
+
+      transition: border-color 0.2s;
+    }
+
+    .cert-item:hover {
+      border-color: var(--accent3);
+    }
+
+    .cert-icon {
+      font-size: 1.8rem;
+
+      flex-shrink: 0;
+    }
+
+    .cert-name {
+      font-size: 0.92rem;
+
+      font-weight: 700;
+
+      color: #fff;
+
+      line-height: 1.4;
+    }
+
+    .cert-body {
+      font-family: var(--mono);
+
+      font-size: 0.7rem;
+
+      color: var(--muted);
+
+      margin-top: 0.2rem;
+
+      letter-spacing: 1px;
+    }
+
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+
+    .contact-inner {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 4rem;
+
+      align-items: start;
+    }
+
+    .contact-text p {
+      color: var(--muted);
+
+      line-height: 1.8;
+
+      font-size: 0.95rem;
+
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+
+      align-items: center;
+
+      gap: 1rem;
+
+      font-family: var(--mono);
+
+      font-size: 0.82rem;
+
+      color: var(--text);
+
+      text-decoration: none;
+
+      padding: 1rem 1.2rem;
+
+      border: 1px solid var(--border);
+
+      border-radius: 4px;
+
+      transition: all 0.2s;
+
+      cursor: none;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+
+      color: var(--accent);
+
+      transform: translateX(6px);
+    }
+
+    .contact-link-icon {
+      font-size: 1.1rem;
+    }
+
+
+    /* =========================================================
+       FORM
+    ========================================================= */
+
+    .contact-form {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 4px;
+
+      padding: 2.5rem;
+    }
+
+    .form-title {
+      font-family: var(--mono);
+
+      font-size: 0.72rem;
+
+      color: var(--accent);
+
+      letter-spacing: 2px;
+
+      margin-bottom: 1.5rem;
+    }
+
+    .form-fields {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 1rem;
+    }
+
+    .form-input {
+      background: var(--bg);
+
+      border: 1px solid var(--border);
+
+      color: var(--text);
+
+      padding: 0.8rem 1rem;
+
+      border-radius: 2px;
+
+      font-family: var(--mono);
+
+      font-size: 0.82rem;
+
+      outline: none;
+
+      transition: border-color 0.2s;
+
+      width: 100%;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+    }
+
+    .form-textarea {
+      resize: vertical;
+    }
+
+    .send-btn {
+      background: var(--accent);
+
+      color: #000;
+
+      border: none;
+
+      padding: 0.9rem;
+
+      font-family: var(--mono);
+
+      font-size: 0.8rem;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      font-weight: bold;
+
+      border-radius: 2px;
+
+      cursor: pointer;
+
+      transition: background 0.2s;
+    }
+
+    .send-btn:hover {
+      background: var(--accent2);
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+
+      padding: 2rem 4rem;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      position: relative;
+
+      z-index: 1;
+    }
+
+    .footer-copy {
+      font-family: var(--mono);
+
+      font-size: 0.72rem;
+
+      color: var(--muted);
+
+      letter-spacing: 1px;
+    }
+
+    .footer-dot {
+      width: 8px;
+
+      height: 8px;
+
+      background: var(--accent2);
+
+      border-radius: 50%;
+
+      animation: pulse 2s infinite;
+    }
+
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(30px);
+
+      transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+
+      transform: none;
+    }
+
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes fadeUp {
+
+      from {
+        opacity: 0;
+
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes rotate {
+
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes rotateReverse {
+
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1100px) {
+
+      .hero-graphic {
+        right: 1rem;
+
+        width: 280px;
+
+        height: 280px;
+      }
+
+      .about-grid {
+        grid-template-columns: 200px 1fr;
+      }
+
+      .about-stats {
+        grid-column: 2;
+      }
+
+      .project-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+
+    @media (max-width: 900px) {
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-photo {
+        margin-bottom: 1rem;
+      }
+
+      .about-stats {
+        grid-column: auto;
+      }
+
+      .hero-graphic {
+        opacity: 0.3;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        gap: 1.2rem;
+      }
+
+      .nav-links a {
+        font-size: 0.65rem;
+
+        letter-spacing: 1px;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+
+      .hero {
+        padding: 0 1.5rem;
+      }
+
+      .hero-graphic {
+        display: none;
+      }
+
+      .hero-name {
+        font-size: clamp(3rem, 15vw, 5rem);
+      }
+
+      .hero-desc {
+        font-size: 0.9rem;
+      }
+
+      .contact-inner {
+        grid-template-columns: 1fr;
+
+        gap: 2rem;
+      }
+
+      .project-summary {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      footer {
+        padding: 1.5rem;
+
+        flex-direction: column;
+
+        gap: 1rem;
+
+        text-align: center;
+      }
+    }
+
+
+    @media (max-width: 500px) {
+
+      .nav-links {
+        gap: 0.7rem;
+      }
+
+      .nav-links li:nth-child(2) {
+        display: none;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+
+        align-items: flex-start;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-summary {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .project-summary-number {
+        font-size: 1.2rem;
+      }
+
+      .contact-form {
+        padding: 1.5rem;
+      }
+    }
+
+  </style>
 </head>
+
+
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">SR // NET</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#certifications">Certs</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+  <!-- =======================================================
+       CUSTOM CURSOR
+  ======================================================== -->
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-inner">
-    <div class="hero-tag">// Network &amp; Security Engineer | Cloud Enthusiast</div>
-    <h1 class="hero-name">Sreeraj<br><span>Ramachandran</span></h1>
-    <div class="hero-role">&gt; Building secure, scalable, high-performance networks</div>
-    <p class="hero-desc">
-      Building secure, scalable, and high-performance network infrastructures with hands-on expertise in routing, switching, and cloud technologies.
+  <div class="cursor" id="cursor"></div>
+
+  <div class="cursor-ring" id="cursorRing"></div>
+
+
+  <!-- =======================================================
+       NAVIGATION
+  ======================================================== -->
+
+  <nav>
+
+    <div class="nav-logo">
+      SR // NET
+    </div>
+
+    <ul class="nav-links">
+
+      <li>
+        <a href="#about">About</a>
+      </li>
+
+      <li>
+        <a href="#skills">Skills</a>
+      </li>
+
+      <li>
+        <a href="#projects">Projects</a>
+      </li>
+
+      <li>
+        <a href="#certifications">Certs</a>
+      </li>
+
+      <li>
+        <a href="#contact">Contact</a>
+      </li>
+
+    </ul>
+
+  </nav>
+
+
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-inner">
+
+      <div class="hero-tag">
+        // Network &amp; Security Engineer | Cloud Enthusiast
+      </div>
+
+      <h1 class="hero-name">
+        Sreeraj
+        <br>
+        <span>Ramachandran</span>
+      </h1>
+
+      <div class="hero-role">
+        &gt; Building secure, scalable, high-performance networks
+      </div>
+
+      <p class="hero-desc">
+        Network and Security Engineer specializing in enterprise
+        network infrastructure, firewall security, routing,
+        switching, VLAN segmentation, VPN technologies,
+        network monitoring, and cloud networking.
+      </p>
+
+      <div class="hero-cta">
+
+        <a href="#projects" class="btn btn-primary">
+          View Projects
+        </a>
+
+        <a href="#contact" class="btn btn-outline">
+          Get In Touch
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- NETWORK GRAPHIC -->
+
+    <div class="hero-graphic">
+
+      <svg viewBox="0 0 340 340"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+
+        <g
+          style="
+            animation: rotate 20s linear infinite;
+            transform-origin: 170px 170px;
+          "
+        >
+
+          <circle
+            cx="170"
+            cy="170"
+            r="160"
+            stroke="rgba(0,229,255,0.12)"
+            stroke-width="1"
+            stroke-dasharray="8 6"
+          />
+
+        </g>
+
+
+        <g
+          style="
+            animation: rotateReverse 14s linear infinite;
+            transform-origin: 170px 170px;
+          "
+        >
+
+          <circle
+            cx="170"
+            cy="170"
+            r="120"
+            stroke="rgba(0,229,255,0.2)"
+            stroke-width="1"
+            stroke-dasharray="4 8"
+          />
+
+          <circle
+            cx="170"
+            cy="50"
+            r="5"
+            fill="var(--accent)"
+            opacity="0.8"
+          />
+
+          <circle
+            cx="274"
+            cy="225"
+            r="5"
+            fill="var(--accent2)"
+            opacity="0.8"
+          />
+
+          <circle
+            cx="66"
+            cy="225"
+            r="5"
+            fill="var(--accent)"
+            opacity="0.8"
+          />
+
+        </g>
+
+
+        <g
+          style="
+            animation: rotate 8s linear infinite;
+            transform-origin: 170px 170px;
+          "
+        >
+
+          <circle
+            cx="170"
+            cy="170"
+            r="75"
+            stroke="rgba(0,255,157,0.15)"
+            stroke-width="1"
+            stroke-dasharray="3 5"
+          />
+
+          <circle
+            cx="170"
+            cy="95"
+            r="4"
+            fill="var(--accent2)"
+            opacity="0.9"
+          />
+
+          <circle
+            cx="235"
+            cy="208"
+            r="4"
+            fill="var(--accent)"
+            opacity="0.9"
+          />
+
+          <circle
+            cx="105"
+            cy="208"
+            r="4"
+            fill="var(--accent3)"
+            opacity="0.9"
+          />
+
+        </g>
+
+
+        <circle
+          cx="170"
+          cy="170"
+          r="36"
+          fill="rgba(0,229,255,0.06)"
+          stroke="var(--accent)"
+          stroke-width="1.5"
+        />
+
+        <circle
+          cx="170"
+          cy="170"
+          r="22"
+          fill="rgba(0,229,255,0.1)"
+          stroke="var(--accent)"
+          stroke-width="1"
+        />
+
+        <circle
+          cx="170"
+          cy="170"
+          r="8"
+          fill="var(--accent)"
+        />
+
+        <line
+          x1="170"
+          y1="134"
+          x2="170"
+          y2="95"
+          stroke="rgba(0,229,255,0.3)"
+          stroke-width="1"
+        />
+
+        <line
+          x1="201"
+          y1="187"
+          x2="235"
+          y2="208"
+          stroke="rgba(0,229,255,0.3)"
+          stroke-width="1"
+        />
+
+        <line
+          x1="139"
+          y1="187"
+          x2="105"
+          y2="208"
+          stroke="rgba(0,229,255,0.3)"
+          stroke-width="1"
+        />
+
+      </svg>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       ABOUT
+  ======================================================== -->
+
+  <section id="about">
+
+    <div class="section-label">
+      // 01. profile
+    </div>
+
+    <h2 class="section-title">
+      Who I <span>Am</span>
+    </h2>
+
+
+    <div class="about-grid">
+
+
+      <!-- PHOTO -->
+
+      <div class="about-photo reveal">
+
+        <div class="photo-frame">
+
+          <img
+            src="photo.jpeg"
+            alt="Sreeraj Ramachandran"
+          >
+
+        </div>
+
+        <div class="photo-name-tag">
+          // SREERAJ.R
+        </div>
+
+      </div>
+
+
+      <!-- BIO -->
+
+      <div class="about-text reveal">
+
+        <p>
+          I am a Network and Security Engineer with hands-on
+          experience in designing, configuring, maintaining,
+          and troubleshooting enterprise network infrastructure.
+        </p>
+
+        <p>
+          My experience covers firewalls, routing, switching,
+          VLAN segmentation, VPN connectivity, wireless
+          infrastructure, network monitoring, CCTV and access
+          control systems, and cloud networking.
+        </p>
+
+        <p>
+          I work with technologies from vendors including
+          SonicWall, Sophos, FortiGate, Cisco, Aruba, Ruijie,
+          TP-Link, Netgear, and other enterprise networking
+          platforms.
+        </p>
+
+        <p>
+          I am continuously developing my skills in advanced
+          network security, cloud networking, automation,
+          and infrastructure management.
+        </p>
+
+      </div>
+
+
+      <!-- STATS -->
+
+      <div class="about-stats reveal">
+
+        <div class="stat-card">
+
+          <div class="stat-num">
+            CCNA
+          </div>
+
+          <div class="stat-label">
+            Cisco Certified
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-num">
+            M365
+          </div>
+
+          <div class="stat-label">
+            Microsoft Certified
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-num">
+            10+
+          </div>
+
+          <div class="stat-label">
+            Projects Delivered
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-num">
+            Azure
+          </div>
+
+          <div class="stat-label">
+            Cloud Platform
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       SKILLS
+  ======================================================== -->
+
+  <section id="skills">
+
+    <div class="section-label">
+      // 02. technical capabilities
+    </div>
+
+    <h2 class="section-title">
+      Technical <span>Arsenal</span>
+    </h2>
+
+
+    <div class="skills-grid">
+
+
+      <!-- ROUTING -->
+
+      <div class="skill-cat reveal">
+
+        <div class="skill-cat-icon">
+          🔀
+        </div>
+
+        <div class="skill-cat-name">
+          Routing &amp; Switching
+        </div>
+
+        <div class="skill-tags">
+
+          <span class="skill-tag">CCNA</span>
+          <span class="skill-tag">Subnetting</span>
+          <span class="skill-tag">IP Addressing</span>
+          <span class="skill-tag">VLANs</span>
+          <span class="skill-tag">802.1Q</span>
+          <span class="skill-tag">STP</span>
+          <span class="skill-tag">DHCP</span>
+          <span class="skill-tag">DNS</span>
+          <span class="skill-tag">NAT</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- SECURITY -->
+
+      <div class="skill-cat reveal">
+
+        <div class="skill-cat-icon">
+          🛡️
+        </div>
+
+        <div class="skill-cat-name">
+          Network Security
+        </div>
+
+        <div class="skill-tags">
+
+          <span class="skill-tag">SonicWall</span>
+          <span class="skill-tag">Sophos</span>
+          <span class="skill-tag">FortiGate</span>
+          <span class="skill-tag">Firewall Management</span>
+          <span class="skill-tag">VPN</span>
+          <span class="skill-tag">NAT</span>
+          <span class="skill-tag">Access Control</span>
+          <span class="skill-tag">Security Zones</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- TOOLS -->
+
+      <div class="skill-cat reveal">
+
+        <div class="skill-cat-icon">
+          🛠️
+        </div>
+
+        <div class="skill-cat-name">
+          Tools &amp; Technologies
+        </div>
+
+        <div class="skill-tags">
+
+          <span class="skill-tag">Wireshark</span>
+          <span class="skill-tag">Nmap</span>
+          <span class="skill-tag">Hping</span>
+          <span class="skill-tag">Zabbix</span>
+          <span class="skill-tag">PRTG</span>
+          <span class="skill-tag">Packet Tracer</span>
+          <span class="skill-tag">Netmiko</span>
+          <span class="skill-tag">Ansible</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- CLOUD -->
+
+      <div class="skill-cat reveal">
+
+        <div class="skill-cat-icon">
+          ☁️
+        </div>
+
+        <div class="skill-cat-name">
+          Cloud — Microsoft Azure
+        </div>
+
+        <div class="skill-tags">
+
+          <span class="skill-tag">Virtual Networks</span>
+          <span class="skill-tag">Subnets</span>
+          <span class="skill-tag">VPN Gateway</span>
+          <span class="skill-tag">Azure VM</span>
+          <span class="skill-tag">Network Security</span>
+          <span class="skill-tag">Resource Management</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- NETWORK INFRA -->
+
+      <div class="skill-cat reveal">
+
+        <div class="skill-cat-icon">
+          📡
+        </div>
+
+        <div class="skill-cat-name">
+          Network Infrastructure
+        </div>
+
+        <div class="skill-tags">
+
+          <span class="skill-tag">Cisco</span>
+          <span class="skill-tag">Aruba</span>
+          <span class="skill-tag">Ruijie</span>
+          <span class="skill-tag">Meraki</span>
+          <span class="skill-tag">Wireless</span>
+          <span class="skill-tag">CCTV</span>
+          <span class="skill-tag">Access Control</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- AUTOMATION -->
+
+      <div class="skill-cat reveal">
+
+        <div class="skill-cat-icon">
+          ⚙️
+        </div>
+
+        <div class="skill-cat-name">
+          Automation &amp; Development
+        </div>
+
+        <div class="skill-tags">
+
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Ansible</span>
+          <span class="skill-tag">Netmiko</span>
+          <span class="skill-tag">React.js</span>
+          <span class="skill-tag">Django</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       NETWORK ENGINEERING PROJECTS
+  ======================================================== -->
+
+  <section id="projects">
+
+    <div class="section-label">
+      // 03. network engineering projects
+    </div>
+
+    <h2 class="section-title">
+      Network Engineering <span>Projects</span>
+    </h2>
+
+    <p class="projects-intro">
+      Selected network infrastructure and security projects
+      involving firewall deployment, VLAN segmentation,
+      routing, switching, VPN connectivity, monitoring,
+      wireless infrastructure, and enterprise troubleshooting.
     </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">View Projects</a>
-      <a href="#contact" class="btn btn-outline">Get In Touch</a>
-    </div>
-  </div>
-  <div class="hero-graphic">
-    <svg viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g style="animation: rotate 20s linear infinite; transform-origin: 170px 170px;">
-        <circle cx="170" cy="170" r="160" stroke="rgba(0,229,255,0.12)" stroke-width="1" stroke-dasharray="8 6"/>
-      </g>
-      <g style="animation: rotateReverse 14s linear infinite; transform-origin: 170px 170px;">
-        <circle cx="170" cy="170" r="120" stroke="rgba(0,229,255,0.2)" stroke-width="1" stroke-dasharray="4 8"/>
-        <circle cx="170" cy="50" r="5" fill="var(--accent)" opacity="0.8"/>
-        <circle cx="274" cy="225" r="5" fill="var(--accent2)" opacity="0.8"/>
-        <circle cx="66" cy="225" r="5" fill="var(--accent)" opacity="0.8"/>
-      </g>
-      <g style="animation: rotate 8s linear infinite; transform-origin: 170px 170px;">
-        <circle cx="170" cy="170" r="75" stroke="rgba(0,255,157,0.15)" stroke-width="1" stroke-dasharray="3 5"/>
-        <circle cx="170" cy="95" r="4" fill="var(--accent2)" opacity="0.9"/>
-        <circle cx="235" cy="208" r="4" fill="var(--accent)" opacity="0.9"/>
-        <circle cx="105" cy="208" r="4" fill="var(--accent3)" opacity="0.9"/>
-      </g>
-      <circle cx="170" cy="170" r="36" fill="rgba(0,229,255,0.06)" stroke="var(--accent)" stroke-width="1.5"/>
-      <circle cx="170" cy="170" r="22" fill="rgba(0,229,255,0.1)" stroke="var(--accent)" stroke-width="1"/>
-      <circle cx="170" cy="170" r="8" fill="var(--accent)"/>
-      <line x1="170" y1="134" x2="170" y2="95" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
-      <line x1="201" y1="187" x2="235" y2="208" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
-      <line x1="139" y1="187" x2="105" y2="208" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
-    </svg>
-  </div>
-</section>
 
-<!-- ABOUT -->
-<section id="about">
-  
-  <h2 class="section-title">Who I <span>Am</span></h2>
-  <div class="about-grid">
 
-    <!-- PHOTO COLUMN -->
-    <div class="about-photo reveal">
-      <div class="photo-frame">
-        <!--
-          TO ADD YOUR PHOTO:
-          1. Save your photo as "photo.jpg" in the same folder as index.html
-          2. Delete the <div class="photo-placeholder">...</div> below
-          3. Uncomment the line below:
-          <img src="photo.jpg" alt="Sreeraj Ramachandran">
-        -->
-        <img src="photo.jpeg" alt="Sreeraj Ramachandran">
-      </div>
-      <div class="photo-name-tag">// SREERAJ.R</div>
-    </div>
+    <div class="projects-grid">
 
-    <!-- BIO COLUMN -->
-    <div class="about-text reveal">
-      <p>
-        I am a Network and Security Engineer with a strong foundation in networking concepts, cloud platforms, and system troubleshooting. I specialize in designing, configuring, and maintaining secure network infrastructures for real-world environments.
-      </p>
-      <p>
-        With hands-on experience in tools like Cisco Packet Tracer, Wireshark, and firewall configurations, I focus on solving practical networking issues such as connectivity failures, VPN access problems, and service availability.
-      </p>
-      <p>
-        I am actively working toward mastering cloud technologies and advanced network security to achieve high-impact roles in the industry.
-      </p>
-    </div>
 
-    <!-- STATS COLUMN -->
-    <div class="about-stats reveal">
-      <div class="stat-card">
-        <div class="stat-num">CCNA</div>
-        <div class="stat-label">Cisco Certified</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">M365</div>
-        <div class="stat-label">Microsoft Certified</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">3+</div>
-        <div class="stat-label">Projects Built</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">Azure</div>
-        <div class="stat-label">Cloud Platform</div>
-      </div>
-    </div>
+      <!-- PROJECT 01 -->
 
-  </div>
-</section>
+      <div class="project-card reveal">
 
-<!-- SKILLS -->
-<section id="skills">
-  
-  <h2 class="section-title">Technical <span>Arsenal</span></h2>
-  <div class="skills-grid">
-    <div class="skill-cat reveal">
-      <div class="skill-cat-icon">🔀</div>
-      <div class="skill-cat-name">Routing &amp; Switching</div>
-      <div class="skill-tags">
-        <span class="skill-tag">CCNA Level</span>
-        <span class="skill-tag">Subnetting</span>
-        <span class="skill-tag">IP Addressing</span>
-        <span class="skill-tag">VLANs</span>
-        <span class="skill-tag">STP</span>
-        <span class="skill-tag">DHCP</span>
-        <span class="skill-tag">DNS</span>
-        <span class="skill-tag">NAT</span>
-      </div>
-    </div>
-    <div class="skill-cat reveal">
-      <div class="skill-cat-icon">🛡️</div>
-      <div class="skill-cat-name">Network Security</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Firewall Management</span>
-        <span class="skill-tag">VPN Config</span>
-        <span class="skill-tag">Access Control</span>
-        <span class="skill-tag">Basic SOC</span>
-        <span class="skill-tag">Network Monitoring</span>
-      </div>
-    </div>
-    <div class="skill-cat reveal">
-      <div class="skill-cat-icon">🛠️</div>
-      <div class="skill-cat-name">Tools &amp; Technologies</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Cisco Packet Tracer</span>
-        <span class="skill-tag">Wireshark</span>
-        <span class="skill-tag">Zabbix</span>
-        <span class="skill-tag">PRTG</span>
-        <span class="skill-tag">Netmiko</span>
-        <span class="skill-tag">Automation</span>
-      </div>
-    </div>
-    <div class="skill-cat reveal">
-      <div class="skill-cat-icon">☁️</div>
-      <div class="skill-cat-name">Cloud — Microsoft Azure</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Virtual Networks</span>
-        <span class="skill-tag">Subnets</span>
-        <span class="skill-tag">VPN Gateway</span>
-        <span class="skill-tag">Resource Management</span>
-      </div>
-    </div>
-    <div class="skill-cat reveal">
-      <div class="skill-cat-icon">💻</div>
-      <div class="skill-cat-name">Development</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">React.js</span>
-        <span class="skill-tag">Django</span>
-      </div>
-    </div>
-    <div class="skill-cat reveal">
-      <div class="skill-cat-icon">🔧</div>
-      <div class="skill-cat-name">Troubleshooting</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Connectivity Issues</span>
-        <span class="skill-tag">VPN Access</span>
-        <span class="skill-tag">Port Diagnosis</span>
-        <span class="skill-tag">App-Layer Failures</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  
-  <h2 class="section-title">Featured <span>Work</span></h2>
-  <div class="projects-grid">
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT_01</div>
-      <div class="project-title">Scene Text &amp; Object Detection Using Deep Learning</div>
-      <p class="project-desc">
-        Developed a system to detect text and objects from images. Integrated OCR (EasyOCR) with object detection models, with a focus on multilingual text recognition across diverse real-world scenes.
-      </p>
-      <div class="project-tags">
-        <span class="project-tag">Deep Learning</span>
-        <span class="project-tag">EasyOCR</span>
-        <span class="project-tag">Object Detection</span>
-        <span class="project-tag">Python</span>
-      </div>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT_02</div>
-      <div class="project-title">Metabolic Fitness App</div>
-      <p class="project-desc">
-        Built as a main academic project, focused on health tracking and analytics. Designed to help users monitor metabolic metrics and gain insights into their fitness progress over time.
-      </p>
-      <div class="project-tags">
-        <span class="project-tag">Health Tech</span>
-        <span class="project-tag">Analytics</span>
-        <span class="project-tag">React.js</span>
-        <span class="project-tag">Django</span>
-      </div>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT_03</div>
-      <div class="project-title">QR Code Based Examination System</div>
-      <p class="project-desc">
-        Designed a system for secure exam access using QR codes, streamlining student verification and reducing the risk of unauthorized access during examinations.
-      </p>
-      <div class="project-tags">
-        <span class="project-tag">QR Code</span>
-        <span class="project-tag">Security</span>
-        <span class="project-tag">Python</span>
-        <span class="project-tag">Web App</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="section-label">// 04. certifications</div>
-  <h2 class="section-title">Credentials &amp; <span>Certs</span></h2>
-  <div class="cert-list">
-    <div class="cert-item reveal">
-      <div class="cert-icon">🏅</div>
-      <div>
-        <div class="cert-name">Cisco Certified Network Associate (CCNA)</div>
-        <div class="cert-body">CISCO SYSTEMS</div>
-      </div>
-    </div>
-    <div class="cert-item reveal">
-      <div class="cert-icon">🏅</div>
-      <div>
-        <div class="cert-name">Microsoft 365 Certified: Modern Desktop Administrator Associate</div>
-        <div class="cert-body">MICROSOFT</div>
-      </div>
-    </div>
-    <div class="cert-item reveal">
-      <div class="cert-icon">🏅</div>
-      <div>
-        <div class="cert-name">NPTEL — Python Programming</div>
-        <div class="cert-body">NPTEL / IIT</div>
-      </div>
-    </div>
-    <div class="cert-item reveal">
-      <div class="cert-icon">🏅</div>
-      <div>
-        <div class="cert-name">NPTEL — Cloud Computing</div>
-        <div class="cert-body">NPTEL / IIT</div>
-      </div>
-    </div>
-    <div class="cert-item reveal">
-      <div class="cert-icon">🏅</div>
-      <div>
-        <div class="cert-name">NPTEL — Java Programming</div>
-        <div class="cert-body">NPTEL / IIT</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
- 
-  <h2 class="section-title">Let's <span>Connect</span></h2>
-  <div class="contact-inner">
-    <div class="contact-text reveal">
-      <p>
-        Based in Kerala, India. Available for network engineering roles, freelance projects, and collaborations. Let's build something reliable together.
-      </p>
-      <div class="contact-links">
-        <a href="mailto:sreerajramachandran396@gmail.com" class="contact-link">
-          <span class="contact-link-icon">📧</span>
-          sreerajramachandran396@gmail.com
-        </a>
-        <a href="tel:+919746160816" class="contact-link">
-          <span class="contact-link-icon">📱</span>
-          +91 97461 60816
-        </a>
-        <a href="https://github.com/SreerajRamachandran" class="contact-link" target="_blank">
-          <span class="contact-link-icon">🐙</span>
-          github.com/SreerajRamachandran
-        </a>
-        <div class="contact-link" style="cursor:default; pointer-events:none;">
-          <span class="contact-link-icon">📍</span>
-          Kerala, India
+        <div class="project-num">
+          PROJECT_01
         </div>
-      </div>
-      <div style="margin-top:2rem;">
-        <div style="font-family:var(--mono);font-size:0.72rem;color:var(--accent);letter-spacing:3px;margin-bottom:1rem;">// LANGUAGES</div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.6rem;">
-          <span class="skill-tag">🇮🇳 Malayalam (Native)</span>
-          <span class="skill-tag">🇬🇧 English (Intermediate)</span>
-          <span class="skill-tag">🇮🇳 Tamil (Intermediate)</span>
-          <span class="skill-tag">🇮🇳 Hindi (Basic)</span>
+
+        <div class="project-title">
+          Enterprise Network Infrastructure Deployment
         </div>
+
+        <div class="project-role">
+          Role: Network Engineer / Project Manager
+        </div>
+
+        <p class="project-desc">
+          Designed and deployed an enterprise network infrastructure
+          consisting of firewall security, core and access switching,
+          VLAN segmentation, IP addressing, internet connectivity,
+          and controlled inter-network communication.
+        </p>
+
+        <ul class="project-work">
+
+          <li>
+            Designed IP addressing and VLAN architecture
+          </li>
+
+          <li>
+            Configured firewall security zones and policies
+          </li>
+
+          <li>
+            Configured core and access switches
+          </li>
+
+          <li>
+            Implemented internet connectivity and routing
+          </li>
+
+          <li>
+            Performed network testing and troubleshooting
+          </li>
+
+        </ul>
+
+        <div class="project-tags">
+
+          <span class="project-tag">SonicWall</span>
+          <span class="project-tag">Aruba</span>
+          <span class="project-tag">VLAN</span>
+          <span class="project-tag">Routing</span>
+          <span class="project-tag">Switching</span>
+          <span class="project-tag">Firewall</span>
+
+        </div>
+
       </div>
+
+
+      <!-- PROJECT 02 -->
+
+      <div class="project-card reveal">
+
+        <div class="project-num">
+          PROJECT_02
+        </div>
+
+        <div class="project-title">
+          Firewall &amp; Network Security Implementation
+        </div>
+
+        <div class="project-role">
+          Role: Network &amp; Security Engineer
+        </div>
+
+        <p class="project-desc">
+          Implemented and managed enterprise firewall environments
+          for secure internet access, network segmentation,
+          application connectivity, VPN access, NAT, and
+          inter-zone security policies.
+        </p>
+
+        <ul class="project-work">
+
+          <li>
+            Configured firewall interfaces and security zones
+          </li>
+
+          <li>
+            Created LAN-to-WAN security policies
+          </li>
+
+          <li>
+            Implemented NAT and port forwarding
+          </li>
+
+          <li>
+            Configured IPsec and remote access VPN
+          </li>
+
+          <li>
+            Troubleshot firewall connectivity and policy issues
+          </li>
+
+        </ul>
+
+        <div class="project-tags">
+
+          <span class="project-tag">SonicWall</span>
+          <span class="project-tag">Sophos</span>
+          <span class="project-tag">FortiGate</span>
+          <span class="project-tag">IPsec</span>
+          <span class="project-tag">VPN</span>
+          <span class="project-tag">NAT</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROJECT 03 -->
+
+      <div class="project-card reveal">
+
+        <div class="project-num">
+          PROJECT_03
+        </div>
+
+        <div class="project-title">
+          Enterprise VLAN &amp; Network Segmentation
+        </div>
+
+        <div class="project-role">
+          Role: Network Engineer
+        </div>
+
+        <p class="project-desc">
+          Designed departmental network segmentation using VLANs
+          and firewall security zones to isolate users and
+          control communication between different business
+          departments while maintaining secure internet access.
+        </p>
+
+        <ul class="project-work">
+
+          <li>
+            Created department-specific VLANs
+          </li>
+
+          <li>
+            Configured VLAN-to-zone mapping
+          </li>
+
+          <li>
+            Implemented inter-zone access policies
+          </li>
+
+          <li>
+            Configured controlled internet access
+          </li>
+
+          <li>
+            Tested isolation and connectivity requirements
+          </li>
+
+        </ul>
+
+        <div class="project-tags">
+
+          <span class="project-tag">VLAN</span>
+          <span class="project-tag">802.1Q</span>
+          <span class="project-tag">Security Zones</span>
+          <span class="project-tag">Firewall</span>
+          <span class="project-tag">Access Control</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROJECT 04 -->
+
+      <div class="project-card reveal">
+
+        <div class="project-num">
+          PROJECT_04
+        </div>
+
+        <div class="project-title">
+          Site-to-Site &amp; Remote Access VPN
+        </div>
+
+        <div class="project-role">
+          Role: Network &amp; Security Engineer
+        </div>
+
+        <p class="project-desc">
+          Configured secure VPN connectivity for remote users
+          and network-to-network communication using IPsec-based
+          VPN technologies and firewall security policies.
+        </p>
+
+        <ul class="project-work">
+
+          <li>
+            Configured IPsec VPN parameters
+          </li>
+
+          <li>
+            Configured remote access VPN
+          </li>
+
+          <li>
+            Defined VPN address objects and routes
+          </li>
+
+          <li>
+            Configured firewall access policies
+          </li>
+
+          <li>
+            Troubleshot authentication and tunnel issues
+          </li>
+
+        </ul>
+
+        <div class="project-tags">
+
+          <span class="project-tag">IPsec</span>
+          <span class="project-tag">VPN</span>
+          <span class="project-tag">SonicWall</span>
+          <span class="project-tag">Routing</span>
+          <span class="project-tag">Remote Access</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROJECT 05 -->
+
+      <div class="project-card reveal">
+
+        <div class="project-num">
+          PROJECT_05
+        </div>
+
+        <div class="project-title">
+          Network Monitoring &amp; Troubleshooting
+        </div>
+
+        <div class="project-role">
+          Role: Network Engineer
+        </div>
+
+        <p class="project-desc">
+          Monitored and troubleshot enterprise network infrastructure
+          to identify connectivity failures, routing problems,
+          packet loss, application access issues, and device
+          performance problems.
+        </p>
+
+        <ul class="project-work">
+
+          <li>
+            Monitored infrastructure using Zabbix and PRTG
+          </li>
+
+          <li>
+            Analyzed traffic using Wireshark
+          </li>
+
+          <li>
+            Performed Nmap-based network discovery
+          </li>
+
+          <li>
+            Diagnosed routing and connectivity failures
+          </li>
+
+          <li>
+            Investigated packet-level network issues
+          </li>
+
+        </ul>
+
+        <div class="project-tags">
+
+          <span class="project-tag">Wireshark</span>
+          <span class="project-tag">Zabbix</span>
+          <span class="project-tag">PRTG</span>
+          <span class="project-tag">Nmap</span>
+          <span class="project-tag">Hping</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROJECT 06 -->
+
+      <div class="project-card reveal">
+
+        <div class="project-num">
+          PROJECT_06
+        </div>
+
+        <div class="project-title">
+          Wireless &amp; Network Infrastructure Deployment
+        </div>
+
+        <div class="project-role">
+          Role: Network Engineer
+        </div>
+
+        <p class="project-desc">
+          Implemented wireless and network infrastructure for
+          enterprise environments, including access point deployment,
+          SSID configuration, VLAN mapping, network security,
+          and connectivity troubleshooting.
+        </p>
+
+        <ul class="project-work">
+
+          <li>
+            Configured enterprise wireless networks
+          </li>
+
+          <li>
+            Mapped SSIDs to network VLANs
+          </li>
+
+          <li>
+            Implemented guest network isolation
+          </li>
+
+          <li>
+            Troubleshot wireless connectivity issues
+          </li>
+
+          <li>
+            Integrated wireless infrastructure with firewalls
+          </li>
+
+        </ul>
+
+        <div class="project-tags">
+
+          <span class="project-tag">Aruba</span>
+          <span class="project-tag">Cisco Meraki</span>
+          <span class="project-tag">Ruijie</span>
+          <span class="project-tag">Wi-Fi</span>
+          <span class="project-tag">VLAN</span>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="reveal" style="background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2.5rem;">
-      <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 1.5rem;">// SEND A MESSAGE</div>
-      <div style="display: flex; flex-direction: column; gap: 1rem;" id="contactForm">
-        <input id="senderName" type="text" placeholder="Your Name"
-          style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.8rem 1rem;border-radius:2px;font-family:var(--mono);font-size:0.82rem;outline:none;transition:border-color 0.2s;"
-          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
-        <input id="senderEmail" type="email" placeholder="Your Email"
-          style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.8rem 1rem;border-radius:2px;font-family:var(--mono);font-size:0.82rem;outline:none;transition:border-color 0.2s;"
-          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
-        <textarea id="senderMessage" placeholder="Your Message" rows="4"
-          style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.8rem 1rem;border-radius:2px;font-family:var(--mono);font-size:0.82rem;outline:none;resize:vertical;transition:border-color 0.2s;"
-          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-        <button id="sendBtn" onclick="sendMessage()"
-          style="background:var(--accent);color:#000;border:none;padding:0.9rem;font-family:var(--mono);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;font-weight:bold;border-radius:2px;cursor:pointer;transition:background 0.2s;"
-          onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">
-          Send Message →
-        </button>
-        <div id="formStatus" style="font-family:var(--mono);font-size:0.8rem;text-align:center;display:none;"></div>
+
+    <!-- PROJECT SUMMARY -->
+
+    <div class="project-summary">
+
+      <div class="project-summary-card reveal">
+
+        <div class="project-summary-number">
+          10+
+        </div>
+
+        <div class="project-summary-label">
+          Projects Delivered
+        </div>
+
       </div>
+
+
+      <div class="project-summary-card reveal">
+
+        <div class="project-summary-number">
+          100+
+        </div>
+
+        <div class="project-summary-label">
+          Client Networks
+        </div>
+
+      </div>
+
+
+      <div class="project-summary-card reveal">
+
+        <div class="project-summary-number">
+          5+
+        </div>
+
+        <div class="project-summary-label">
+          Firewall Platforms
+        </div>
+
+      </div>
+
+
+      <div class="project-summary-card reveal">
+
+        <div class="project-summary-number">
+          24/7
+        </div>
+
+        <div class="project-summary-label">
+          Infrastructure Support
+        </div>
+
+      </div>
+
     </div>
-  </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-copy">© 2026 Sreeraj Ramachandran. All rights reserved.</div>
-  <div style="display:flex;align-items:center;gap:0.6rem;">
-    <div class="footer-dot"></div>
-    <span style="font-family:var(--mono);font-size:0.72rem;color:var(--muted);">Available for work</span>
-  </div>
-</footer>
+  </section>
 
-<script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
-  });
-  function animateRing() {
-    rx += (mx - rx - 18) * 0.12;
-    ry += (my - ry - 18) * 0.12;
-    ring.style.transform = `translate(${rx}px, ${ry}px)`;
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
 
-  // Formspree contact form
-  async function sendMessage() {
-    const name = document.getElementById('senderName').value.trim();
-    const email = document.getElementById('senderEmail').value.trim();
-    const message = document.getElementById('senderMessage').value.trim();
-    const btn = document.getElementById('sendBtn');
-    const status = document.getElementById('formStatus');
+  <!-- =======================================================
+       CERTIFICATIONS
+  ======================================================== -->
 
-    if (!name || !email || !message) {
-      status.style.display = 'block';
-      status.style.color = 'var(--accent3)';
-      status.textContent = '⚠ Please fill in all fields.';
-      return;
+  <section id="certifications">
+
+    <div class="section-label">
+      // 04. certifications
+    </div>
+
+    <h2 class="section-title">
+      Credentials &amp; <span>Certs</span>
+    </h2>
+
+
+    <div class="cert-list">
+
+
+      <div class="cert-item reveal">
+
+        <div class="cert-icon">
+          🏅
+        </div>
+
+        <div>
+
+          <div class="cert-name">
+            Cisco Certified Network Associate (CCNA)
+          </div>
+
+          <div class="cert-body">
+            CISCO SYSTEMS
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="cert-item reveal">
+
+        <div class="cert-icon">
+          🏅
+        </div>
+
+        <div>
+
+          <div class="cert-name">
+            Microsoft 365 Certified:
+            Modern Desktop Administrator Associate
+          </div>
+
+          <div class="cert-body">
+            MICROSOFT
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="cert-item reveal">
+
+        <div class="cert-icon">
+          🏅
+        </div>
+
+        <div>
+
+          <div class="cert-name">
+            NPTEL — Python Programming
+          </div>
+
+          <div class="cert-body">
+            NPTEL / IIT
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="cert-item reveal">
+
+        <div class="cert-icon">
+          🏅
+        </div>
+
+        <div>
+
+          <div class="cert-name">
+            NPTEL — Cloud Computing
+          </div>
+
+          <div class="cert-body">
+            NPTEL / IIT
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="cert-item reveal">
+
+        <div class="cert-icon">
+          🏅
+        </div>
+
+        <div>
+
+          <div class="cert-name">
+            NPTEL — Java Programming
+          </div>
+
+          <div class="cert-body">
+            NPTEL / IIT
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       CONTACT
+  ======================================================== -->
+
+  <section id="contact">
+
+    <div class="section-label">
+      // 05. contact
+    </div>
+
+    <h2 class="section-title">
+      Let's <span>Connect</span>
+    </h2>
+
+
+    <div class="contact-inner">
+
+
+      <!-- CONTACT INFO -->
+
+      <div class="contact-text reveal">
+
+        <p>
+          Based in Kerala, India. Available for network engineering
+          roles, infrastructure projects, freelance opportunities,
+          and technical collaborations.
+        </p>
+
+
+        <div class="contact-links">
+
+
+          <a
+            href="mailto:sreerajramachandran396@gmail.com"
+            class="contact-link"
+          >
+
+            <span class="contact-link-icon">
+              📧
+            </span>
+
+            sreerajramachandran396@gmail.com
+
+          </a>
+
+
+          <a
+            href="tel:+919746160816"
+            class="contact-link"
+          >
+
+            <span class="contact-link-icon">
+              📱
+            </span>
+
+            +91 97461 60816
+
+          </a>
+
+
+          <a
+            href="https://github.com/SreerajRamachandran"
+            class="contact-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+
+            <span class="contact-link-icon">
+              🐙
+            </span>
+
+            github.com/SreerajRamachandran
+
+          </a>
+
+
+          <div
+            class="contact-link"
+            style="
+              cursor:default;
+              pointer-events:none;
+            "
+          >
+
+            <span class="contact-link-icon">
+              📍
+            </span>
+
+            Kerala, India
+
+          </div>
+
+        </div>
+
+
+        <!-- LANGUAGES -->
+
+        <div style="margin-top:2rem;">
+
+          <div
+            style="
+              font-family:var(--mono);
+              font-size:0.72rem;
+              color:var(--accent);
+              letter-spacing:3px;
+              margin-bottom:1rem;
+            "
+          >
+            // LANGUAGES
+          </div>
+
+
+          <div
+            style="
+              display:flex;
+              flex-wrap:wrap;
+              gap:0.6rem;
+            "
+          >
+
+            <span class="skill-tag">
+              🇮🇳 Malayalam (Native)
+            </span>
+
+            <span class="skill-tag">
+              🇬🇧 English (Intermediate)
+            </span>
+
+            <span class="skill-tag">
+              🇮🇳 Tamil (Intermediate)
+            </span>
+
+            <span class="skill-tag">
+              🇮🇳 Hindi (Basic)
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONTACT FORM -->
+
+      <div class="contact-form reveal">
+
+        <div class="form-title">
+          // SEND A MESSAGE
+        </div>
+
+
+        <div class="form-fields" id="contactForm">
+
+
+          <input
+            id="senderName"
+            class="form-input"
+            type="text"
+            placeholder="Your Name"
+          >
+
+
+          <input
+            id="senderEmail"
+            class="form-input"
+            type="email"
+            placeholder="Your Email"
+          >
+
+
+          <textarea
+            id="senderMessage"
+            class="form-input form-textarea"
+            placeholder="Your Message"
+            rows="5"
+          ></textarea>
+
+
+          <button
+            id="sendBtn"
+            class="send-btn"
+            onclick="sendMessage()"
+          >
+            Send Message →
+          </button>
+
+
+          <div
+            id="formStatus"
+            style="
+              font-family:var(--mono);
+              font-size:0.8rem;
+              text-align:center;
+              display:none;
+            "
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="footer-copy">
+      © 2026 Sreeraj Ramachandran. All rights reserved.
+    </div>
+
+
+    <div
+      style="
+        display:flex;
+        align-items:center;
+        gap:0.6rem;
+      "
+    >
+
+      <div class="footer-dot"></div>
+
+      <span
+        style="
+          font-family:var(--mono);
+          font-size:0.72rem;
+          color:var(--muted);
+        "
+      >
+        Available for work
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+
+    /* =======================================================
+       CUSTOM CURSOR
+    ======================================================== */
+
+    const cursor =
+      document.getElementById('cursor');
+
+    const ring =
+      document.getElementById('cursorRing');
+
+    let mx = 0;
+    let my = 0;
+
+    let rx = 0;
+    let ry = 0;
+
+
+    document.addEventListener(
+      'mousemove',
+      e => {
+
+        mx = e.clientX;
+
+        my = e.clientY;
+
+        cursor.style.transform =
+          `translate(${mx - 5}px, ${my - 5}px)`;
+
+      }
+    );
+
+
+    function animateRing() {
+
+      rx +=
+        (mx - rx - 18) * 0.12;
+
+      ry +=
+        (my - ry - 18) * 0.12;
+
+      ring.style.transform =
+        `translate(${rx}px, ${ry}px)`;
+
+      requestAnimationFrame(
+        animateRing
+      );
     }
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
-    try {
-      const res = await fetch('https://formspree.io/f/xojyronq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, email, message })
-      });
-      if (res.ok) {
-        status.style.display = 'block';
-        status.style.color = 'var(--accent2)';
-        status.textContent = '✅ Message sent! I\'ll get back to you soon.';
-        document.getElementById('senderName').value = '';
-        document.getElementById('senderEmail').value = '';
-        document.getElementById('senderMessage').value = '';
-        btn.textContent = 'Sent ✓';
-      } else { throw new Error('Failed'); }
-    } catch(e) {
-      status.style.display = 'block';
-      status.style.color = 'var(--accent3)';
-      status.textContent = '❌ Something went wrong. Please try again.';
-      btn.textContent = 'Send Message →';
-      btn.disabled = false;
-      btn.style.opacity = '1';
-    }
-  }
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
-</script>
+
+    animateRing();
+
+
+    /* =======================================================
+       FORM
+    ======================================================== */
+
+    async function sendMessage() {
+
+      const name =
+        document
+          .getElementById('senderName')
+          .value
+          .trim();
+
+      const email =
+        document
+          .getElementById('senderEmail')
+          .value
+          .trim();
+
+      const message =
+        document
+          .getElementById('senderMessage')
+          .value
+          .trim();
+
+
+      const btn =
+        document.getElementById('sendBtn');
+
+      const status =
+        document.getElementById('formStatus');
+
+
+      /* VALIDATION */
+
+      if (!name || !email || !message) {
+
+        status.style.display =
+          'block';
+
+        status.style.color =
+          'var(--accent3)';
+
+        status.textContent =
+          '⚠ Please fill in all fields.';
+
+        return;
+      }
+
+
+      /* EMAIL VALIDATION */
+
+      const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+      if (!emailPattern.test(email)) {
+
+        status.style.display =
+          'block';
+
+        status.style.color =
+          'var(--accent3)';
+
+        status.textContent =
+          '⚠ Please enter a valid email address.';
+
+        return;
+      }
+
+
+      /* BUTTON STATE */
+
+      btn.textContent =
+        'Sending...';
+
+      btn.disabled =
+        true;
+
+      btn.style.opacity =
+        '0.7';
+
+
+      try {
+
+
+        const res =
+          await fetch(
+            'https://formspree.io/f/xojyronq',
+            {
+
+              method: 'POST',
+
+              headers: {
+                'Content-Type':
+                  'application/json',
+
+                'Accept':
+                  'application/json'
+              },
+
+              body:
+                JSON.stringify({
+                  name,
+                  email,
+                  message
+                })
+
+            }
+          );
+
+
+        if (res.ok) {
+
+
+          status.style.display =
+            'block';
+
+          status.style.color =
+            'var(--accent2)';
+
+          status.textContent =
+            '✅ Message sent! I\'ll get back to you soon.';
+
+
+          document
+            .getElementById('senderName')
+            .value = '';
+
+
+          document
+            .getElementById('senderEmail')
+            .value = '';
+
+
+          document
+            .getElementById('senderMessage')
+            .value = '';
+
+
+          btn.textContent =
+            'Sent ✓';
+
+
+        } else {
+
+          throw new Error(
+            'Failed'
+          );
+
+        }
+
+
+      } catch (e) {
+
+
+        status.style.display =
+          'block';
+
+        status.style.color =
+          'var(--accent3)';
+
+        status.textContent =
+          '❌ Something went wrong. Please try again.';
+
+        btn.textContent =
+          'Send Message →';
+
+        btn.disabled =
+          false;
+
+        btn.style.opacity =
+          '1';
+
+      }
+
+    }
+
+
+    /* =======================================================
+       SCROLL REVEAL
+    ======================================================== */
+
+    const reveals =
+      document.querySelectorAll(
+        '.reveal'
+      );
+
+
+    const observer =
+      new IntersectionObserver(
+
+        entries => {
+
+          entries.forEach(
+            entry => {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry.target
+                  .classList
+                  .add('visible');
+
+              }
+
+            }
+          );
+
+        },
+
+        {
+          threshold: 0.12
+        }
+
+      );
+
+
+    reveals.forEach(
+      element =>
+        observer.observe(element)
+    );
+
+
+    /* =======================================================
+       NAVIGATION ACTIVE EFFECT
+    ======================================================== */
+
+    const sections =
+      document.querySelectorAll(
+        'section[id]'
+      );
+
+    const navLinks =
+      document.querySelectorAll(
+        '.nav-links a'
+      );
+
+
+    window.addEventListener(
+      'scroll',
+      () => {
+
+        let current = '';
+
+
+        sections.forEach(
+          section => {
+
+            const sectionTop =
+              section.offsetTop - 150;
+
+            if (
+              window.scrollY >=
+              sectionTop
+            ) {
+
+              current =
+                section.getAttribute(
+                  'id'
+                );
+
+            }
+
+          }
+        );
+
+
+        navLinks.forEach(
+          link => {
+
+            link.style.color =
+              '';
+
+
+            if (
+              link.getAttribute(
+                'href'
+              ) === `#${current}`
+            ) {
+
+              link.style.color =
+                'var(--accent)';
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  </script>
+
 </body>
+
 </html>
